@@ -13,13 +13,13 @@
 
 ## ScreenShots
 
-    ![Alt text](screenshots/1.png?raw=true "Login/Register")
+![Alt text](screenshots/1.png?raw=true "Login/Register")
 
-    ![Alt text](screenshots/2.png?raw=true "Home/Dashboard")
+![Alt text](screenshots/2.png?raw=true "Home/Dashboard")
 
-    ![Alt text](screenshots/3.png?raw=true "Home/Dashboard")
+![Alt text](screenshots/3.png?raw=true "Home/Dashboard")
 
-    ![Alt text](screenshots/4.png?raw=true "Home/Dashboard")
+![Alt text](screenshots/4.png?raw=true "Home/Dashboard")
 
 ## Deployment Scripts
 

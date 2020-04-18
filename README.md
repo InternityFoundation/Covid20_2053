@@ -13,13 +13,13 @@
 
 ## ScreenShots
 
-![Alt text](screenshots/Screenshot 2020-04-19 at 3.11.42 AM.png?raw=true "Login/Register")
+    ![Alt text](screenshots/1.png?raw=true "Login/Register")
 
-![Alt text](screenshots/Screenshot 2020-04-19 at 3.12.25 AM.png?raw=true "Home/Dashboard")
+    ![Alt text](screenshots/2.png?raw=true "Home/Dashboard")
 
-![Alt text](screenshots/Screenshot 2020-04-19 at 3.12.38 AM.png?raw=true "Home/Dashboard")
+    ![Alt text](screenshots/3.png?raw=true "Home/Dashboard")
 
-![Alt text](screenshots/Screenshot 2020-04-19 at 3.12.58 AM.png?raw=true "Home/Dashboard")
+    ![Alt text](screenshots/4.png?raw=true "Home/Dashboard")
 
 ## Deployment Scripts
 

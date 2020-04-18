@@ -1,30 +1,14 @@
-# [Django Dashboard Adminator](https://appseed.us/admin-dashboards/django-dashboard-adminator)
-
-**Open-Source Admin Dashboard** coded in **[Django Framework](https://www.djangoproject.com/)** on top of **Adminator Dashboard** design (free version) - Provided by **AppSeed** [Web App Generator](https://appseed.us/app-generator).
-
-<br />
-
-> **[Feedback/Suggest Feature](https://appseed.nolt.io/)**
-
-This product is **built based on community feedback**. Feel free (anonymously) to **[suggest/vote features](https://appseed.nolt.io/4)**. For more information, please access the [Facebook](https://www.facebook.com/webappseed/) page or chat with us on [Discord](https://discord.gg/fZC6hup).
-
->  Related Links
-
-- [Django Admin Dashboards](https://dev.to/sm0ke/django-admin-dashboards-open-source-and-free-1o80) - published on Dev.to
-- [Django Dashboard](https://dev.to/sm0ke/django-dashboard-learn-by-coding-437l) - Learn by Coding - a comprehensive tutorial published on Dev
+# Covid20_2053
+<!-- 
+**Open-Source Admin Dashboard** coded in **[Django Framework](https://www.djangoproject.com/)** on top of **Adminator Dashboard** design (free version) - Provided by **AppSeed** [Web App Generator](https://appseed.us/app-generator). -->
 
 <br />
-
-## Dashboard Features
-
+<!-- 
 - UI-Ready app, SQLite Database, Django Native ORM
 - Modular design, clean code-base
 - Session-Based Authentication, Forms validation
 - Deployment scripts: Heroku, Docker, Gunicorn / Nginx
-- UI Kit: **[Adminator Dashboard](https://colorlib.com/polygon/adminator/index.html?ref=appseed)** (Free version) provided by **ColorLib**
-- **MIT License**
-- Support: Free support via **Github** and (Paid) **24/7 LIVE Support** via [Discord](https://discord.gg/fZC6hup)
-
+- UI Kit: **[Adminator Dashboard](https://colorlib.com/polygon/adminator/index.html?ref=appseed)** (Free version) provided by  -->
 <br />
 
 ## Deployment Scripts
@@ -36,34 +20,12 @@ This product is **built based on community feedback**. Feel free (anonymously) t
 
 <br />
 
-## Dashboard Links
-
-- [Django Dashboard Adminator](https://appseed.us/admin-dashboards/django-dashboard-adminator) - Product page 
-- [Django Dashboard Adminator](https://django-dashboard-adminator.appseed.us/login/) - LIVE Demo
-- [Django Dashboard Adminator](https://docs.appseed.us/admin-dashboards/django-dashboard-adminator/) - Docs
-
-<br />
-
-## Want more? Go PRO!
-
-PRO versions include **Premium UI Kits**, Lifetime updates and **24/7 LIVE Support** (via [Discord](https://discord.gg/fZC6hup)) 
-
-| [Premium Django Dashboards](https://appseed.us/bundles/django-admin-dashboards-pro) | [Django Dashboard Black PRO](https://appseed.us/admin-dashboards/django-dashboard-black-pro) | [Django Dashboard Dashkit PRO](https://appseed.us/admin-dashboards/django-dashboard-dashkit-pro) |
-| --- | --- | --- |
-| [![Premium Django Dashboards - Provided by AppSeed.](https://raw.githubusercontent.com/app-generator/static/master/products/django-dashboard-material-pro-screen.png)](https://appseed.us/bundles/django-admin-dashboards-pro)  | [![Django Dashboard Black PRO](https://raw.githubusercontent.com/app-generator/static/master/products/django-dashboard-black-pro-screen.png)](https://appseed.us/admin-dashboards/django-dashboard-black-pro) | [![Django Dashboard Dashkit PRO](https://raw.githubusercontent.com/app-generator/static/master/products/django-dashboard-dashkit-pro-screen.png)](https://appseed.us/admin-dashboards/django-dashboard-dashkit-pro)
-
-<br />
-<br />
-
-![Django Dashboard Adminator - Open-Source Web App.](https://raw.githubusercontent.com/app-generator/static/master/products/django-dashboard-adminator-screen.png)
-
-<br />
 
 ## How to use it
 
 ```bash
 $ # Get the code
-$ git clone https://github.com/app-generator/django-dashboard-adminator.git
+$ git clone https://github.com/InternityFoundation/Covid20_2053.git
 $ cd django-dashboard-adminator
 $
 $ # Virtualenv modules installation (Unix based systems)
@@ -217,4 +179,4 @@ Adminator is a responsive Bootstrap 4 Admin Template. It provides you with a col
 
 ---
 [Django Dashboard Adminator](https://appseed.us/admin-dashboards/django-dashboard-adminator) - Provided by **AppSeed** [Web App Generator](https://appseed.us/app-generator).
-# Covid20_2053
+

@@ -2,8 +2,15 @@
 
 {% block title %} Dashboard {% endblock title %}
 
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />{% endblock stylesheets %}
+{% block scripts %}
 
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+
+{% endblock scripts %}
 {% block content %}
 
 <div class="row gap-20 masonry pos-r">
@@ -98,14 +105,217 @@
               <h6 class="lh-1">Heat Map</h6>
             </div>
             <div class="layer w-100">
-              <div id="google-map" style="padding-bottom: 75%;"></div>
+              <div id='map' style='width: 100; height: 500px;'></div>
+              <script>
+                mapboxgl.accessToken = 'pk.eyJ1IjoibmVlbHBhcmloYXIiLCJhIjoiY2s5NWZ1bDZjMDY3NTNtcjFpdjZ4bnhmdiJ9.ZzFeFsBaPwQ42F1frkzrmA';
+                var map = new mapboxgl.Map({
+                  container: 'map',
+                  style: 'mapbox://styles/mapbox/streets-v10',
+                  center: [72.87742, 19.07609],
+                  zoom: 9
+                });
+                var hoveredStateId = null;
+                map.on('load', function () {
+                  // Add a source for the state polygons.
+                  map.addSource('states', {
+                    'type': 'geojson',
+                    'data': '/static/assets/static/jsondata/file.geojson'
+                  });
+                  map.addLayer({
+                    'id': 'points',
+                    'type': 'symbol',
+                    'source': 'states',
+                    'layout': {
+                      // get the icon name from the source's "icon" property
+                      // concatenate the name to get an icon from the style's sprite sheet
+                      'icon-image': ['get', 'zone'],
+                      // get the title name from the source's "title" property
+                      'text-field': ['get', 'title'],
+                      'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                      'text-offset': [0, 0.6],
+                      'text-anchor': 'top'
+                    }
+                  });
+                  map.addLayer({
+                    'id': 'state-fills',
+                    'type': 'fill',
+                    'source': 'states',
+                    'layout': {},
+                    'paint': {
+                      'fill-color': '#627BC1',
+                      'fill-opacity': '1'
+                    }
+                  });
+
+                  map.addLayer({
+                    'id': 'state-borders',
+                    'type': 'line',
+                    'source': 'states',
+                    'layout': {},
+                    'paint': {
+                      'line-color': '#627BC1',
+                      'line-width': 2
+                    }
+                  });
+
+                  map.on('click', 'state-fills', function (e) {
+                    new mapboxgl.Popup()
+                      .setLngLat(e.lngLat)
+                      .setHTML(e.features[0].properties.name)
+                      .addTo(map);
+                  });
+
+                  // Change the cursor to a pointer when the mouse is over the states layer.
+                  map.on('mouseenter', 'state-fills', function () {
+                    map.getCanvas().style.cursor = 'pointer';
+                  });
+
+                  // Change it back to a pointer when it leaves.
+                  map.on('mouseleave', 'state-fills', function () {
+                    map.getCanvas().style.cursor = '';
+                  });
+                  map.addSource('earthquakes', {
+                    'type': 'geojson',
+                    'data':
+                      'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson'
+                  });
+
+                  map.addLayer(
+                    {
+                      'id': 'earthquakes-heat',
+                      'type': 'heatmap',
+                      'source': 'earthquakes',
+                      'maxzoom': 9,
+                      'paint': {
+                        // Increase the heatmap weight based on frequency and property magnitude
+                        'heatmap-weight': [
+                          'interpolate',
+                          ['linear'],
+                          ['get', 'mag'],
+                          0,
+                          0,
+                          6,
+                          1
+                        ],
+                        // Increase the heatmap color weight weight by zoom level
+                        // heatmap-intensity is a multiplier on top of heatmap-weight
+                        'heatmap-intensity': [
+                          'interpolate',
+                          ['linear'],
+                          ['zoom'],
+                          0,
+                          1,
+                          9,
+                          3
+                        ],
+                        // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
+                        // Begin color ramp at 0-stop with a 0-transparancy color
+                        // to create a blur-like effect.
+                        'heatmap-color': [
+                          'interpolate',
+                          ['linear'],
+                          ['heatmap-density'],
+                          0,
+                          'rgba(33,102,172,0)',
+                          0.2,
+                          'rgb(103,169,207)',
+                          0.4,
+                          'rgb(209,229,240)',
+                          0.6,
+                          'rgb(253,219,199)',
+                          0.8,
+                          'rgb(239,138,98)',
+                          1,
+                          'rgb(178,24,43)'
+                        ],
+                        // Adjust the heatmap radius by zoom level
+                        'heatmap-radius': [
+                          'interpolate',
+                          ['linear'],
+                          ['zoom'],
+                          0,
+                          2,
+                          9,
+                          20
+                        ],
+                        // Transition from heatmap to circle layer by zoom level
+                        'heatmap-opacity': [
+                          'interpolate',
+                          ['linear'],
+                          ['zoom'],
+                          7,
+                          1,
+                          9,
+                          0
+                        ]
+                      }
+                    },
+                    'waterway-label'
+                  );
+
+                  map.addLayer(
+                    {
+                      'id': 'earthquakes-point',
+                      'type': 'circle',
+                      'source': 'earthquakes',
+                      'minzoom': 7,
+                      'paint': {
+                        // Size circle radius by earthquake magnitude and zoom level
+                        'circle-radius': [
+                          'interpolate',
+                          ['linear'],
+                          ['zoom'],
+                          7,
+                          ['interpolate', ['linear'], ['get', 'mag'], 1, 1, 6, 4],
+                          16,
+                          ['interpolate', ['linear'], ['get', 'mag'], 1, 5, 6, 50]
+                        ],
+                        // Color circle by earthquake magnitude
+                        'circle-color': [
+                          'interpolate',
+                          ['linear'],
+                          ['get', 'mag'],
+                          1,
+                          'rgba(33,102,172,0)',
+                          2,
+                          'rgb(103,169,207)',
+                          3,
+                          'rgb(209,229,240)',
+                          4,
+                          'rgb(253,219,199)',
+                          5,
+                          'rgb(239,138,98)',
+                          6,
+                          'rgb(178,24,43)'
+                        ],
+                        'circle-stroke-color': 'white',
+                        'circle-stroke-width': 1,
+                        // Transition from heatmap to circle layer by zoom level
+                        'circle-opacity': [
+                          'interpolate',
+                          ['linear'],
+                          ['zoom'],
+                          7,
+                          0,
+                          8,
+                          1
+                        ]
+                      }
+                    },
+                    'waterway-label'
+                  );
+
+
+
+                });
+              </script>
             </div>
           </div>
         </div>
-        <div class="peer bdL p-20 w-30p@lg+ w-100p@lg-">
+        <!-- <div class="peer bdL p-20 w-30p@lg+ w-100p@lg-">
           <div class="layers">
             <div class="layer w-100">
-              <!-- Progress Bars -->
+              Progress Bars
               <div class="layers">
                 <div class="layer w-100">
                   <h5 class="mB-5">100k</h5>
@@ -146,7 +356,7 @@
                 </div>
               </div>
 
-              <!-- Pie Charts -->
+              Pie Charts
               <div class="peers pT-20 mT-20 bdT fxw-nw@lg+ jc-sb ta-c gap-10">
                 <div class="peer">
                   <div class="easy-pie-chart" data-size="80" data-percent="75" data-bar-color="#f44336">
@@ -169,7 +379,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
